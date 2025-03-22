@@ -71,6 +71,7 @@ SMODS.Joker {
                 if pseudorandom("getjinxed") < fail_prob then
                     return {
                         message = localize("k_jinxed_ex"),
+                        colour = HEX("00B3FF"),
                         delay = 0.9
                     }
                 else return {

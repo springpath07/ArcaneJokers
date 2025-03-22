@@ -68,7 +68,8 @@
 <small><i>Blue hair and pronouns...</i></small>
 
 <b>High Roller</b> &ndash; Sevika
-> Gives either +50 Chips, +25 Mult, x3 Mult, or all of the above; rolls for each card left in hand (takes best roll)
+> +60 Chips, +30 Mult, x3 Mult, or all of the above; rolls for each card left in hand (takes best roll)
+> (60%, 25%, 12%, 3% chance respectively)
 
 ## Rare
 <b>Chosen</b> &ndash; Ambessa, Mel

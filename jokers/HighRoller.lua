@@ -1,5 +1,5 @@
--- Gives either +60 Chips, +30 Mult, x3 Mult, or all of the above
--- (50%, 35%, 10%, 5%); rolls for each card left in your hand (takes best roll)
+-- +60 Chips, +30 Mult, x3 Mult, or all of the above
+-- (60%, 25%, 12%, 3%); rolls for each card left in your hand (takes best roll)
 
 SMODS.Joker {
     key = "high_roller",
@@ -45,13 +45,13 @@ SMODS.Joker {
             -- rolls for each card left in hand
             for i = 1, #G.hand.cards do
                 roll = pseudorandom("highroller", 1, 100)
-                if roll <= 5 then  -- jackpot
+                if roll <= 3 then  -- jackpot
                     card.ability.extra.effect = "all"
                     card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil,
                         {message = localize("k_jackpot_ex"), colour = G.C.GOLD, delay = 0.9})
                     break
-                elseif roll <= 10 then card.ability.extra.effect = "xmult"  -- x3M
-                elseif roll <= 35 and card.ability.extra.effect ~= "xmult" then  -- +30M
+                elseif roll <= 12 then card.ability.extra.effect = "xmult"  -- x3M
+                elseif roll <= 25 and card.ability.extra.effect ~= "xmult" then  -- +30M
                     card.ability.extra.effect = "mult"
                 end
             end
