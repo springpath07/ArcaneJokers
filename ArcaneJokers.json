@@ -1,0 +1,16 @@
+{
+	"id": "Arcane_Jokers",
+	"name": "Arcane Jokers",
+	"display_name": "Arcane",
+	"author": ["springpath"],
+	"description": "Inspired by Netflix's Arcane",
+	"prefix": "arc",
+	"main_file": "ArcaneJokers.lua",
+	"priority": 0,
+	"badge_colour": "070B17",
+	"badge_text_colour": "F6CD96",
+	"version": "1.0.0",
+	"dependencies": [
+		"Steamodded (>=1.0.0~BETA-0301f)"
+	]
+}
