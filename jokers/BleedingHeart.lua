@@ -34,24 +34,14 @@ SMODS.Joker {
     pos = {x = 3, y = 2},
 
     calculate = function(self, card, context)
-        if context.before and not context.blueprint then
-            local has_six_h = false
-
+        if context.individual and not context.blueprint then
             -- adds xmult if requirements met
-            for i = 1, #context.scoring_hand do
-                local current_card = context.scoring_hand[i]
-                if current_card:get_id() == 6 and current_card:is_suit("Hearts")
-                  and not current_card.debuff then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_gain
-                    has_six_h = true
-                    context.scoring_hand[i].ability.s_six_h = true
-                end
-            end
-
-            if has_six_h then
+            if context.other_card:get_id() == 6 and context.other_card:is_suit("Hearts") then
+                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_gain
+                context.other_card.ability.s_six_h = true  -- tag for card to be debuffed for rest of ante
+                context.other_card:set_debuff(true)
                 return {
-                    message = localize("k_upgrade_ex"),
-                    colour = HEX("FF005F"),
+                    extra = {focus = card, message = localize("k_upgrade_ex"), colour = HEX("FF005F")},
                     card = card
                 }
             end
@@ -62,21 +52,10 @@ SMODS.Joker {
                 x_mult = card.ability.extra.x_mult
             }
 
-        -- debuffs scoring 6Hs
-        -- TODO: why is the debuff graphic appearing before the cards visually score? (visually debuffed card still scores as intended)
-        elseif context.after and not context.blueprint then
-            for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i]:get_id() == 6
-                  and context.scoring_hand[i]:is_suit("Hearts")
-                  and not context.scoring_hand[i].debuff then
-                    context.scoring_hand[i]:set_debuff(true)
-                end
-            end
-
         -- removes debuffs on played 6Hs at end of ante
         elseif G.GAME.blind.boss and context.end_of_round and context.cardarea == G.jokers
           and not context.blueprint then
-            remove_debuffs_in_deck()
+            remove_bleeding_heart_debuff()
             return {
                 delay = 1,
                 message = localize("k_debuffs_reset"),
@@ -88,9 +67,7 @@ SMODS.Joker {
     update = function(self, card, dt)
         if G.STAGE == G.STAGES.RUN and G.GAME.blind.name ~= "The Head" then
             for k, v in pairs(G.playing_cards) do
-                if v.base.id == 6 and v.base.suit == "Hearts" and v.ability.s_six_h == true then
-                        v:set_debuff(true)
-                end
+                if v.ability.s_six_h then v:set_debuff(true) end
             end
         end
     end

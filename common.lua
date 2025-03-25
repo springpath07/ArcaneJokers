@@ -1,7 +1,7 @@
 -- un-debuffs cards, currently only indiv. playing cards but may change later
-function remove_debuffs_in_deck()
+function remove_bleeding_heart_debuff()
     for k, v in pairs(G.playing_cards) do
-        if v.base.id == 6 and v.base.suit == "Hearts" and not v.perma_debuff then
+        if v.ability.s_six_h and not v.perma_debuff then
             v.ability.s_six_h = false
             v:set_debuff(false)
         end

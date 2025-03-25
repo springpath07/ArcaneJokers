@@ -47,9 +47,9 @@ SMODS.Joker {
 
             -- calc number of arcane jokers
             for i = 1, #G.jokers.cards do
-                if not G.jokers.cards[i].debuff and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
+                if not G.jokers.cards[i].debuff and G.jokers.cards[i].area
+                  and G.jokers.cards[i].area == G.jokers then
                     local j_name = G.jokers.cards[i].ability.name
-
                     for k, v in ipairs(arc_j_list) do
                         if v == j_name then n = n + 1 end
                     end

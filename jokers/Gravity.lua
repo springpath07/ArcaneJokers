@@ -39,7 +39,7 @@ SMODS.Joker {
                 -- card countdown
                 if not context.blueprint and card.ability.p_remaining ~= 0 then
                     card_eval_status_text(card,
-                            'extra', nil, nil, nil,
+                            "extra", nil, nil, nil,
                             {message = localize{type = "variable", key = "a_remaining",
                             vars = {card.ability.extra.p_remaining}},
                             colour = G.C.SECONDARY_SET.Spectral})
@@ -66,7 +66,7 @@ SMODS.Joker {
                             end
                         }))
                         card_eval_status_text(context.blueprint_card or card,
-                            'extra', nil, nil, nil,
+                            "extra", nil, nil, nil,
                             {message = localize('k_activate_ex'),
                             colour = G.C.SECONDARY_SET.Spectral})
                     end

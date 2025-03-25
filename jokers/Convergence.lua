@@ -52,7 +52,7 @@ SMODS.Joker {
                 card.ability.extra.most_played = most_played_hands()
             end
 
-        -- retrigger cards if conditions met
+        -- retrigger hand if conditions are met
         elseif context.repetition and context.cardarea == G.play and #card.ability.extra.most_played > 0 then
             for i = 1, #card.ability.extra.most_played do
                 if context.scoring_name == card.ability.extra.most_played[i] then

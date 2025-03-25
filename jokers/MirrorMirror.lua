@@ -34,7 +34,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
-            if context.other_card:get_id() == 12 and not context.other_card.debuff then
+            if context.other_card:get_id() == 12 then
                 -- addt. chips/mult from relevant enhanced cards (bonus/mult/lucky)
                 if SMODS.has_enhancement(context.other_card, "m_bonus") then  -- bonus
                     card.ability.extra.chips = card.ability.extra.chips + 30
@@ -53,13 +53,11 @@ SMODS.Joker {
                 -- addt. chips/mult from individual card permabonuses
                 if context.other_card.ability.perma_bonus > 0 then  -- bonus chips
                     card.ability.extra.chips = card.ability.extra.chips + context.other_card.ability.perma_bonus
-                    card_eval_status_text(card, "chips",
-                        context.other_card.ability.perma_bonus)
+                    card_eval_status_text(card, "chips", context.other_card.ability.perma_bonus)
                 end
                 if context.other_card.ability.perma_mult > 0 then  -- bonus mult
                     card.ability.extra.mult = card.ability.extra.mult + context.other_card.ability.perma_mult
-                    card_eval_status_text(card, "mult",
-                        context.other_card.ability.perma_mult)
+                    card_eval_status_text(card, "mult", context.other_card.ability.perma_mult)
                 end
 
                 -- addt. chips/mult from relevant editions (foil/holo)

@@ -33,10 +33,8 @@ SMODS.Joker {
             if has_card_space then  -- consumable area has space to create card
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 for i = 1, #context.scoring_hand do
-                    local card_id = context.scoring_hand[i]:get_id()
-
-                    -- creates planet card
-                    if card_id == 11 and not context.scoring_hand[i].debuff then
+                    if context.scoring_hand[i]:get_id() == 11 then
+                        -- creates planet card
                         G.E_MANAGER:add_event(Event({
                             func = function()
                                 local card = SMODS.create_card{set = "Planet", area = G.consumeables}

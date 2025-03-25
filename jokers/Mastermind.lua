@@ -33,6 +33,7 @@ SMODS.Joker {
     pos = {x = 3, y = 1},
 
     calculate = function(self, card, context)
+        -- add mult when card is destroyed
         if context.remove_playing_cards and not context.blueprint then
             for i = 1, #context.removed do
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
@@ -47,11 +48,11 @@ SMODS.Joker {
                 })
             end
 
+        -- return mult during scoring time
         elseif context.joker_main and (card.ability.extra.mult > 0) then
             return {
                 mult = card.ability.extra.mult
             }
         end
     end
-
 }

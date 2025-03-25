@@ -5,6 +5,10 @@ SMODS.Joker {
     cost = 4,
     rarity = 1,
 
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_wild
+    end,
+
     unlocked = true,
     discovered = true,
     blueprint_compat = true,

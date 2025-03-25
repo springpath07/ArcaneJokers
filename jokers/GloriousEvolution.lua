@@ -7,18 +7,17 @@ SMODS.Joker {
 
     config = {
         extra = {
-            num = 1,
-            den = 2
+            copy_chance = 2
         }
     },
 
-    -- #1# : Numerator chance
-    -- #2# : Denominator chance
+    -- #1# : Copy chance
+    -- #2# : Copy chance denominator
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.extra.num,
-                card.ability.extra.den
+                G.GAME and G.GAME.probabilities.normal or 1,
+                card.ability.extra.copy_chance
             }
         }
     end,
@@ -35,7 +34,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.playing_card_added and not card.getting_sliced then
             if context.cards and context.cards[1] then
-                if has_modification(context.cards[1]) and pseudorandom("gloriousevo") < 0.5 then
+                if has_modification(context.cards[1]) and pseudorandom("gloriousevo")
+                  < G.GAME.probabilities.normal / card.ability.extra.copy_chance then
                     -- adds card to deck (ref. "DNA" implementation)
                     G.playing_card = (G.playing_card and G.playing_card + 1) or 1
                     local ge_card = copy_card(context.cards[1], nil, nil, G.playing_card)

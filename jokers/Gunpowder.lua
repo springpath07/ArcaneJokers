@@ -38,7 +38,7 @@ SMODS.Joker {
             local n = 0
 
             for i = 1, #G.hand.cards do
-                if not G.hand.cards[i].debuff and G.hand.cards[i]:get_id() == 14 then
+                if G.hand.cards[i]:get_id() == 14 then
                     n = n + 1
                 end
             end
@@ -52,7 +52,7 @@ SMODS.Joker {
                 x_mult = card.ability.extra.x_mult
             }
 
-        -- discard a random ace if there's >= 1 ace in hand (ref. "The Hook" implementation)
+        -- discard a random (non-debuffed) ace if there's >= 1 ace in hand (ref. "The Hook" implementation)
         elseif context.after and not context.blueprint then
             card.ability.extra.x_mult = 1  -- reset
 
@@ -61,7 +61,7 @@ SMODS.Joker {
                 local aces = {}
 
                 for k, v in ipairs(G.hand.cards) do
-                    if v.base.id == 14 then aces[#aces + 1] = v end
+                    if v:get_id() == 14 then aces[#aces + 1] = v end
                 end
 
                 if #aces > 0 then

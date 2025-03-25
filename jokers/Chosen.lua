@@ -38,21 +38,15 @@ SMODS.Joker {
 
             if has_card_space then  -- consumable area has space to create card
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-                local debuffed_queens_count = 0
 
                 -- queen check
                 for i = 1, #context.full_hand do
-                    local current_card = context.full_hand[i]
-                    if current_card:get_id() ~= 12 then
-                        card.ability.extra.is_all_queens = false
-                        break
-                    elseif current_card:get_id() == 12 and current_card.debuff then
-                        debuffed_queens_count = debuffed_queens_count + 1
+                    if context.full_hand[i]:get_id() ~= 12 then
+                        card.ability.extra.is_all_queens = false break
                     end
                 end
 
-                -- also checks if hand played was only debuffed queens (joker will not activate if so)
-                if card.ability.extra.is_all_queens and (debuffed_queens_count < #context.full_hand) then
+                if card.ability.extra.is_all_queens then
                     local roll = pseudorandom("chosen", 1, 3)
                     if roll == 1 then  -- strength
                         G.E_MANAGER:add_event(Event({

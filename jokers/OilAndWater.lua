@@ -35,6 +35,7 @@ SMODS.Joker {
         local check_one_heart = 0
 
         if context.before then
+            -- checks for EXACTLY 1 spade and heart
             for i = 1, #context.scoring_hand do
                 if not context.scoring_hand[i].debuff then
                     if context.scoring_hand[i]:is_suit("Spades") then

@@ -46,7 +46,7 @@ SMODS.Joker {
         if context.repetition and card.ability.extra.retriggers_left > 0 then
             if has_any_enhancement(context.other_card) then
                 return {
-                    message = localize('k_again_ex'),
+                    message = localize("k_again_ex"),
                     repetitions = card.ability.extra.retrigger_count,
                     card = card
                 }
@@ -74,8 +74,7 @@ SMODS.Joker {
           and card.ability.extra.retriggers_left > 0 and not context.blueprint then
             if card.ability.extra.retriggers_left == 1 then
                 card.ability.extra.retriggers_left = 0
-                -- set eternal
-                if not card.ability.extra.expired then
+                if not card.ability.extra.expired then  -- set eternal
                     card.ability.extra.expired = true
                     card:set_eternal(true)
                     card_eval_status_text(card, "extra", nil, nil, nil, {

@@ -33,6 +33,7 @@ SMODS.Joker {
     pos = {x = 4, y = 1},
 
     calculate = function(self, card, context)
+        -- add mult if strength/hanged man/death is used
         if context.using_consumeable and not context.blueprint then
             if context.consumeable.ability.name == "Strength" or
                context.consumeable.ability.name == "The Hanged Man" or
@@ -44,6 +45,8 @@ SMODS.Joker {
                     card = card
                 }
             end
+
+        -- return mult during scoring time
         elseif context.joker_main and (card.ability.extra.mult > 0) then
             return {
                 mult = card.ability.extra.mult
