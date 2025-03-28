@@ -1,4 +1,4 @@
--- Gives x0.5 Mult (starts at x1 Mult) per Ace held in hand; discards an Ace after each hand
+-- Gives x0.5 Mult per Ace held in hand; discards an Ace after each hand
 
 SMODS.Joker {
     key = "gunpowder",
@@ -8,7 +8,6 @@ SMODS.Joker {
     config = {
         extra = {
             x_mult_gain = 0.5,
-            x_mult = 1
         }
     },
 
@@ -18,7 +17,7 @@ SMODS.Joker {
         return {
             vars = {
                 card.ability.extra.x_mult_gain,
-                card.ability.extra.x_mult
+                math.max(1, 1 + card.ability.extra.x_mult_gain * held_in_hand(14))
             }
         }
     end,
@@ -33,29 +32,18 @@ SMODS.Joker {
     pos = {x = 4, y = 2},
 
     calculate = function(self, card, context)
-        -- calc final given xmult
-        if context.before and not context.blueprint then
-            local n = 0
-
-            for i = 1, #G.hand.cards do
-                if G.hand.cards[i]:get_id() == 14 then
-                    n = n + 1
-                end
+        -- calc xmult
+        if context.scoring_hand and context.joker_main then
+            local x_mult = math.max(1, 1 + card.ability.extra.x_mult_gain * held_in_hand(14))
+            if x_mult > 1 then
+                return {
+                    message = localize{type = "variable", key = "a_xmult", vars = {x_mult}},
+                    colour = G.C.XMULT
+                }
             end
-
-            card.ability.extra.x_mult = card.ability.extra.x_mult 
-                + (card.ability.extra.x_mult_gain * n)
-
-        -- return xmult during scoring time
-        elseif context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
 
         -- discard a random (non-debuffed) ace if there's >= 1 ace in hand (ref. "The Hook" implementation)
         elseif context.after and not context.blueprint then
-            card.ability.extra.x_mult = 1  -- reset
-
             G.E_MANAGER:add_event(Event({ func = function()
                 local any_selected = nil
                 local aces = {}
@@ -69,7 +57,7 @@ SMODS.Joker {
                     G.hand:add_to_highlighted(selected_card, true)
                     table.remove(aces, card_key)
                     any_selected = true
-                    play_sound('card1', 1)
+                    play_sound("card1", 1)
                 end
 
                 if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end

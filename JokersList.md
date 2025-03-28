@@ -76,7 +76,7 @@
 > If first hand of round contains only Queens, create Strength, The Hanged Man, or Death (Must have room)
 
 <b>Get Jinxed!</b> &ndash; Jinx
-> Select to use on this hand and reset. Gains x0.2 Mult and 1 in 50 chance to fail when used for each discarded card (Currently x1 Mult, 1 in 50 chance to fail)
+> Select to use on this hand and reset. Gains x0.2 Mult and 1 in 50 chance to fail when used for each discarded card (Currently x1 Mult, 0 in 50 chance to fail)
 
 <b>Gravity</b> &ndash; Jayce, Viktor
 > For every 6 Planet cards used, create a Black Hole (Must have room; 6 cards remaining)

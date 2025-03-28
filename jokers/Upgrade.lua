@@ -8,7 +8,7 @@ SMODS.Joker {
 
     config = {
         extra = {
-            edition_chance = 4
+            edition_chance = 2
         }
     },
 
@@ -49,14 +49,13 @@ SMODS.Joker {
 
                     card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil,
                         {message = localize("k_upgrade_heim"), colour = G.C.SECONDARY_SET.Edition,
-                        delay = 1})
+                        delay = 0.1 * G.SETTINGS.GAMESPEED, hold = 1.2})
 
                 -- Nope!
                 elseif not hit then
-                    return {
-                        delay = 0.9,
-                        message = localize("k_nope_ex")
-                    }
+                    card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil,
+                        {message = localize("k_nope_ex"), colour = G.C.SECONDARY_SET.Edition,
+                        delay = 0.2 * G.SETTINGS.GAMESPEED, hold = 1.2})
                 end
             end
         end

@@ -80,10 +80,10 @@ return {
             j_arc_gunpowder = {
                 name = "Gunpowder",
                 text = {
-                    "Gives {X:mult,C:white}X#1#{} Mult (starts",
-                    "at {X:mult,C:white}X#2#{} Mult) per {C:attention}Ace{}",
+                    "Gives {X:mult,C:white}X#1#{} Mult per {C:attention}Ace{}",
                     "held in hand; discards an",
-                    "{C:attention}Ace{} after each hand"
+                    "{C:attention}Ace{} after each hand",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{}{C:inactive} Mult)"
                 },
             },
 
